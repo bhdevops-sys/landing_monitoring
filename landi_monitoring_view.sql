@@ -1,4 +1,4 @@
-;WITH CatchData AS (
+WITH CatchData AS (
     SELECT 
         fc.f_stock_id,
         c.catch_id,
@@ -65,7 +65,11 @@ SELECT
 
     wgt_kg AS [total_weight(kgs)],
     recorded_share_name,
-
+ROUND(CASE 
+        WHEN fishing_hours > 0 
+        THEN CAST(wgt_kg AS FLOAT) / CAST(fishing_hours AS FLOAT)
+        ELSE NULL 
+    END,2) AS CPUE_kg_per_hour,
     (SELECT STUFF((
         SELECT ', ' + category_name
         FROM (
