@@ -61,7 +61,7 @@ SELECT
         FROM CatchData cd
         WHERE cd.f_stock_id = fs.f_stock_id
         ORDER BY cd.catch_id
-        FOR XML PATH(''), TYPE).value('.', 'NVARCHAR(MAX)'), 1, 2, '')) AS [number_of_caught_species],
+        FOR XML PATH(''), TYPE).value('.', 'NVARCHAR(MAX)'), 1, 2, '')) AS [count_of_individuals_per_species],
 
     wgt_kg AS [total_weight(kgs)],
     recorded_share_name,
