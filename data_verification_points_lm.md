@@ -99,7 +99,7 @@ WHERE ([total_weight(kgs)] = 0 OR [total_weight(kgs)] IS NULL);
 ```sql
 SELECT * 
 FROM fish_catch_view
-WHERE (number_of_caught_species IS NULL 
+WHERE (count_of_individuals_per_species IS NULL 
        OR [individual_wght(kg)] IS NULL 
        OR local_name IS NULL)
   AND date_time_landed > '2025-04-25 10:00:00.000'
