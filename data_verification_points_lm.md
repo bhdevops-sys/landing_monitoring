@@ -69,7 +69,7 @@ Prevent duplicates and ensure correct spelling.
 ```sql
 SELECT * 
 FROM fish_catch_view
-WHERE submission_date > GETDATE();
+WHERE date_time_landed > GETDATE();
 ```
 
 ### Duplicate Catch Records
