@@ -87,6 +87,13 @@ JOIN (
    AND a.[individual_wght(kg)] = b.[individual_wght(kg)]
 ORDER BY a.date_time_landed, fisher_name_id;
 ```
+### Duplicate Species Records
+```sql
+select label_name, common_english,scientific_family,scientific_species, COUNT(label_name) as lbl_no
+from catch
+group by label_name,common_english,scientific_family,scientific_species
+having count(*)>1
+```
 
 ### Outliers in Weight
 ```sql
