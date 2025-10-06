@@ -89,9 +89,9 @@ ORDER BY a.date_time_landed, fisher_name_id;
 ```
 ### Duplicate Species Records
 ```sql
-select label_name, common_english,scientific_family,scientific_species, COUNT(label_name) as lbl_no
+select label_name,local_name, common_english,scientific_family,scientific_species, COUNT(label_name) as lbl
 from catch
-group by label_name,common_english,scientific_family,scientific_species
+group by label_name,local_name, common_english,scientific_family,scientific_species
 having count(*)>1
 ```
 
