@@ -1,1 +1,1 @@
-<img width="3243" height="2523" alt="Landing_profiling_v2" src="https://github.com/user-attachments/assets/b11f90d2-bc70-4d5a-98d6-c7b65d30e160" />
+<img width="3273" height="2523" alt="Landing_profiling" src="https://github.com/user-attachments/assets/84a4b8b8-5c56-4800-8804-ba2118257a3d" />
