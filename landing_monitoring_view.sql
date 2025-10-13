@@ -67,9 +67,9 @@ SELECT
     recorded_share_name,
 ROUND(CASE 
         WHEN fishing_hours > 0 
-        THEN CAST(wgt_kg AS FLOAT) / CAST(fishing_hours AS FLOAT)
+        THEN CAST(wgt_kg AS FLOAT) /crew_size/ CAST(fishing_hours AS FLOAT)
         ELSE NULL 
-    END,2) AS CPUE_kg_per_hour,
+    END,2) AS CPUE_kg_per_crew_size_per_hour,
     (SELECT STUFF((
         SELECT ', ' + category_name
         FROM (
