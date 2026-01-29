@@ -1,0 +1,72 @@
+select 
+gvs.gov_asmt_id, assessment_datetime, p.party_name as 'name of interviewer',intd.party_id,p1.party_name as interviewee,agb.age_bracket_name as age,p1.organization_id ,p3.party_name as BMU,
+
+education_en as education,ocp.occupation_en as primary_occupation,ocp1.occupation_en as secondary_ocupation,
+
+rsp2.response_name_en as q2_is_boundary_demarcated,
+rsp3.response_name_en as q3_are_there_harvesting_rules,
+rsp4.response_name_en as q4_are_there_mechanisms_for_stakeholder_rights_for_defining_rules_for_cma_resource_use,
+rsp5.response_name_en as q5_are_there_rules_allowing_stakeholder_rights_to_exclude_groups_from_resource_harvesting,
+rsp6.response_name_en as q6_are_there_resource_management_legistlations_for_bmu,
+rsp7.response_name_en as q7_are_stakeholders_able_to_exercise_their_rights_to_resources,
+rsp8.response_name_en as q8_what_extent_are_affected_bmu_stakeholders_able_to_change_rules,
+rsp9.response_name_en as 'q9_do_women_&_vulnerable_groups_have_clearly_defined_rights_to_cma_resources',
+rsp10.response_name_en as q10_is_there_efective_equitable_cma_benefit_sharing_strategy_for_bmu_stakeholder,
+rsp11.response_name_en as 'q11_are_there_networks_developing_&_supporting_stakeholder_mutual_learning',
+rsp12.response_name_en as q12_is_climate_change_info_used_to_inform_strategies_for_community_ressillience,
+rsp13.response_name_en as q13_cma_bmu_governors_held_accountable_for_their_roles,
+rsp13b.response_name_en as q13b_do_bmu_stakeholders_receive_bmu_info_timely,
+rsp14.response_name_en as q14_do_bmu_stakeholders_have_access_to_conflict_resolution_mechanisms,
+rsp15.response_name_en as  q15_to_what_extent_do_penalties_for_breaking_reource_use_rules_apply ,
+rsp16.response_name_en as 'q16_are_systems_in_place_to_monitor_&_document_cma_ecological_conditions',
+rsp17.response_name_en as 'q17_are_systems_in_place_to_monitor_&_document_cma_communities_social_conditions',
+rsp18.response_name_en as 'q18_are_systems_in_place_to_monitor_&_document_climate_change_impacts',
+rsp19.response_name_en as q19_are_cma_manager_integrate_diverse_knowledge_in_managerial_decisions,
+rsp20.response_name_en as 'q20_are_monitoring_research_&_evaluation_results_routinely_incorporated_into_cma_decisions_or_policies',
+rsp21.response_name_en as q21_is_cma_conciously_managed_to_adapt_to_climate_change,
+rsp22.response_name_en as q22_to_what_extent_do_you_feel_ecological_outcomes_being_achieved,
+rsp23.response_name_en as q23_to_what_extent_do_you_feel_social_outcomes_being_achieved,
+rsp24.response_name_en as q24_do_cma_bmu_managers_have_capacity_to_enforce_rules_and_regulations,
+rsp25.response_name_en as q25_are_there_enough_people_employed_engaged_to_manage_bmu,
+rsp26.response_name_en as q26_do_cma_managers_have_capacity_to_fulfill_management_objectives,
+rsp27.response_name_en as q27_is_budget_for_supporting_cma_bmu_activities_sufficient
+
+
+from governance_survey gvs
+left join response rsp1 on gvs.q1_is_jcma_boundary=rsp1.response_id
+left join response rsp2 on gvs.q2_is_demarcated=rsp2.response_id
+left join response rsp3 on gvs.q3_is_harvesting_rule=rsp3.response_id
+left join response rsp4 on gvs.q4_cma_rcs_use_right=rsp4.response_id
+left join response rsp5 on gvs.q5_group_exclusion=rsp5.response_id
+left join response rsp6 on gvs.q6_rsc_mgmt_legislations=rsp6.response_id
+left join response rsp7 on gvs.q7_rights_exercise=rsp7.response_id
+left join response rsp8 on gvs.q8_rule_change=rsp8.response_id
+left join response rsp9 on gvs.q9_wavg_rights=rsp9.response_id
+left join response rsp10 on gvs.q10_benefit_sharing_strat=rsp10.response_id
+left join response rsp11 on gvs.q11_is_learning_support=rsp11.response_id
+left join response rsp12 on gvs.q12_is_cc_info_used=rsp12.response_id
+left join response rsp13 on gvs.q13_governor_accountability=rsp13.response_id
+left join response rsp13b on gvs.q13b_is_bmu_info_timely=rsp13b.response_id
+left join response rsp14 on gvs.q14_conflict_resolution=rsp14.response_id
+left join response rsp15 on gvs.q15_penalties_extent=rsp15.response_id
+left join response rsp16 on gvs.q16_is_cma_eco_conditions_doc=rsp16.response_id
+left join response rsp17 on gvs.q17_is_social_conditions_doc=rsp17.response_id
+left join response rsp18 on gvs.q18_is_cc_impact_monitored_doc=rsp18.response_id
+left join response rsp19 on gvs.q19_is_diverse_knowledge_integrated=rsp19.response_id
+left join response rsp20 on gvs.q20_is_mer_results_incorporated=rsp20.response_id
+left join response rsp21 on gvs.q21_cc_adaptation=rsp21.response_id
+left join response rsp22 on gvs.q22_eco_outcomes_achievement=rsp22.response_id
+left join response rsp23 on gvs.q23_social_outcomes_achievement=rsp23.response_id
+left join response rsp24 on gvs.q24_r_and_regs_enforcement=rsp24.response_id
+left join response rsp25 on gvs.q25_is_enough_people_engaged=rsp25.response_id
+left join response rsp26 on gvs.q26_mgmt_objectives_fulfilment=rsp26.response_id
+left join response rsp27 on gvs.q27_is_budget_sufficient=rsp27.response_id
+left join party p on p.party_id=gvs.interviewer_id
+left join interviewee_detail intd on intd.gov_asmt_id=gvs.gov_asmt_id
+left join party p1 on p1.party_id=intd.party_id
+left join age_bracket agb on agb.age_bracket_id=intd.age_bracket_id
+left join party p2 on p2.party_id=intd.bmu_category_id
+left join education ed on ed.education_id=intd.education_id
+left join occupation ocp on ocp.occupation_id=intd.pri_occupation_id
+left join occupation ocp1 on ocp1.occupation_id=intd.sec_occupation_id
+left join party p3 on p3.party_id=p1.organization_id
