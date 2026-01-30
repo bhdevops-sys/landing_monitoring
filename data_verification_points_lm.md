@@ -134,7 +134,7 @@ WHERE (count_of_individuals_per_species IS NULL
   AND date_time_landed > '2025-04-25 10:00:00.000'
 ORDER BY date_time_landed DESC;
 ```
-### Capture Method
+### Duplicate Capture Method
 ```sql
 SELECT capture_method_name, COUNT(*) AS counts
 FROM capture_method
