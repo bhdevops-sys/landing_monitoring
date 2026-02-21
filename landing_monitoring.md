@@ -2,10 +2,10 @@
 
 #### Introduction
 
-The Fish Landing Monitoring Mobile App is developed to assist fishermen in capturing and reporting landing data effectively.
-This app allows users to log various details such as species caught, landing and capture sites, vessel and gear used, total weight, 
-sold weight, and pricing in Kenyan Shillings (KES). Built using **AppSheet**, the data is stored in a **Microsoft SQL Azure** 
-database and visualized with **Power BI** for improved resource management and transparency.
+The Fish Landing Monitoring Mobile App is designed to assist fishermen in capturing and reporting landing data effectively.
+This app allows users to log various details such as species caught, landing and capture sites, vessel and type of  fishing gear used, 
+individual and aggregated weight of species caught in Kilograms, and pricing in Kenyan Shillings (KES). Built using **AppSheet**, 
+the data is stored in a **Microsoft SQL Azure** database and visualized in **Power BI** for improved resource management and transparency.
 
 ---
 
@@ -18,17 +18,16 @@ database and visualized with **Power BI** for improved resource management and t
 5. [Data Structure](#data-structure)
 6. [Reporting and Visualization](#reporting-and-visualization)
 7. [Deployment](#deployment)
-8. [Contact Information](#contact-information)
 
 ---
 
 #### Features
 
-- **Catch Logging:** Fishermen can log details of fish caught, including species, capture site, and methods used.
-- **Landing Site Information:** Records data on landing sites and associated Beach Management Units (BMUs).
-- **Weight and Pricing:** Input total weight, sold weight, and pricing for fish in KES.
+- **Catch Logging:** Fishermen can log details of fish caught, including species, capture site, and capture method used.
+- **Landing Site Information:** Records data on landing site and associated Beach Management Units (BMUs).
+- **Weight and Pricing:** Input individual and aggregated weight of species caught, sold catch weight in kg and price for sold fish in KES.
 - **Data Verification:** Submitted data is verified by Bahari Hai Fisheries Program staff for accuracy.
-- **Data Analysis:** Enables deeper insights into fishing trends, species health, and economic factors.
+- **Data Analysis:** Enables deeper insights into fishing trends, and species abundance.
 
 ---
 
@@ -48,13 +47,15 @@ The mobile app operates through a clear business process for efficient data coll
   
 2. **Data Entry:**
    - Fishermen log the following details:
+     - Fishing start datetime
+     - Fishing stop datetime
      - Fish species caught
-     - Capture site (GPS location)
+     - Capture site
      - Landing site
      - Beach Management Unit (BMU)
      - Vessel and gear used
-     - Total weight (in kilograms) and sold weight
-     - Price per kilogram (KES)
+     - indiviual caught species weight (in kilograms) and sold weight
+     - Price per kilogram (KES) of sold catch
 
 3. **Data Submission:** Fishermen submit the data for review. 
 
@@ -71,8 +72,8 @@ The mobile app operates through a clear business process for efficient data coll
 #### User Guide
 
 1. **Creating an Account:**
-   - Download the app from the device’s app store.
-   - Register an account using your email and a secure password.
+   - Download the appsheet app from your device's app store;Google play, App store.
+   - Create an account using your email and set a password (link to app will be shared to this account by app creator).
 
 2. **Navigating the Interface:**
    - **Home Screen:** Offers options for data logging, reports, and user settings.
@@ -82,8 +83,8 @@ The mobile app operates through a clear business process for efficient data coll
    - Complete the required fields including species, capture site, weight, and price.
    - Submit the entry for verification.
 
-4. **Receiving Feedback:**
-   - Stay updated on the status of your submission through notifications regarding verification results.
+4. **Viewing Reports:**
+   - uon request a link will be shared to the reports section to visual analysis provided by Power BI.
 
 ---
 
@@ -93,15 +94,17 @@ The mobile app operates through a clear business process for efficient data coll
 
 | Table Name           | Description                                               |
 |----------------------|-----------------------------------------------------------|
-| FishCatches          | Records details of fish caught including species, weights, and prices. |
-| LandingSites         | Stores information about landing sites and associated BMUs. |
-| CaptureSites         | Maintains records of locations where fish were captured. |
-| VesselsAndGear       | Captures data regarding vessels and gear utilized in fishing. |
-| PriceInfo            | Contains price data for fish per species.                |
+| f_stock          | Records details of fish caught including species, weights, and prices. |
+| site         | Stores information about landing and capture sites and associated BMUs. |
+| catch         | Maintains records of species;local,common,family and species name. |
+| vessel       | Captures data regarding vessels utilized in fishing. |
+| gear       | Captures data regarding fishing gear and gear size utilized in fishing. |
+| party       | Captures data regarding parties including; fisheeman utilized in fishing. |
+| f_stock_catch            | Contains details on species caught; species name, weight, number and photo if new. |
 
 ##### Entity-Relationship Diagram (ERD)
 
-For a visual representation of the database structure, refer to the [Entity-Relationship Diagram (ERD)](ERD/fish_landing_monitoring_erd.md).
+For a visual representation of the database structure, refer to the [ERD/fish_landing_monitoring_erd.md](https://github.com/bhdevops-sys/landing_monitoring/blob/main/ERD/landing_monitoring_erd.md).
 
 ---
 
@@ -122,6 +125,6 @@ To deploy the Fish Landing Monitoring Mobile App, follow these steps:
 1. Set up your **SQL Azure** database to support incoming data.
 2. Configure the AppSheet application to connect to the database securely.
 3. Test all functionalities thoroughly to ensure they are operating correctly.
-4. Publish the application for participating fishermen to access.
+4. Deploy/Publish the application for participating fishermen to access.
 
 ---
