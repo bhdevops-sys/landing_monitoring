@@ -119,7 +119,7 @@ This catalog describes the structure, meaning, and rules of data in a the BH lan
 #### party
 | Field Name | SQL Type | Length / Precision | Nullable | Example Value | Allowed Values / Format | Description |
 |------------|----------|-------------------|----------|---------------|------------------------|-------------|
-| party_id | varchar | 8 | No | RPT001 | Alphanumeric | Unique ID for each party (person,group or organization) |
+| party_id | varchar | 8 | No | tyg4rt | Alphanumeric | Unique ID for each party (person,group or organization) |
 | party_type_id | int | 10 | No | 1 | Integer (FK) | Reference to party_type (lookup table) |
 | party_name | varchar | 200 | No | Kalume Karisa | Text | Full name of party, group or organization |
 | party_telephone_1 | varchar | 20 | Yes | +254701234567 | Text / Numeric | Primary contact number |
