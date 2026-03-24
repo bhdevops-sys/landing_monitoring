@@ -116,25 +116,68 @@ This catalog describes the structure, meaning, and rules of data in a the BH lan
 
 ---
 
-#### party_type
+#### party
+| Field Name | SQL Type | Length / Precision | Nullable | Example Value | Allowed Values / Format | Description |
+|------------|----------|-------------------|----------|---------------|------------------------|-------------|
+| party_id | varchar | 8 | No | RPT001 | Alphanumeric | Unique ID for each party (person,group or organization) |
+| party_type_id | int | 10 | No | 1 | Integer (FK) | Reference to party_type (lookup table) |
+| party_name | varchar | 200 | No | Kalume Karisa | Text | Full name of party, group or organization |
+| party_telephone_1 | varchar | 20 | Yes | +254701234567 | Text / Numeric | Primary contact number |
+| party_telephone_2 | varchar | 20 | Yes | +254712345678 | Text / Numeric | Secondary contact number |
+| party_email | varchar | 50 | Yes | karisa@baharihai.org | Email format | Email address |
+| site_id | varchar | 8 | No | S001 | Alphanumeric (FK) | Reference to site |
+| sex_id | varchar | 8 | Yes | Male | Alphanumeric (FK) | Reference to sex (`sex_id`) |
+| organization_id | varchar | 8 | Yes | baharihai | Alphanumeric (FK)| Reference to party (`party_id`) |
 
+---
+
+#### party_type
+| Field Name          | SQL Type | Length / Precision | Nullable | Example Value        | Allowed Values / Format | Description                                      |
+|---------------------|----------|-------------------|----------|---------------------|------------------------|--------------------------------------------------|
+| party_type_id       | int      | 10                | No       | 4                   | Integer (0-10)         | Unique identifier for the party type.            |
+| party_type_name     | varchar  | 20                | Yes      | Organization          | String (max 20 chars)  | Name of the party type in English.                |
+| party_type_swahili  | varchar  | 100               | Yes      | Shirika  | String (max 100 chars) | Name of the party type in Swahili.                |
+
+---
 
 #### sex
+| Field Name | SQL Type | Length / Precision | Nullable | Example Value | Allowed Values / Format | Description |
+|------------|----------|-------------------|----------|---------------|------------------------|-------------|
+| sex_id | int | 10 | No | 1 | Integer (Primary Key) | Unique ID for sex |
+| sex_name | varchar | 20 | No | Male | Text | Name of sex in English |
+| sex_name_swahili | varchar | 100 | Yes | Mwanaume | Text | Name of sex in Swahili (optional) |
 
-
-#### party
-
+---
 
 #### site
+| Field Name | SQL Type | Length / Precision | Nullable | Example Value | Allowed Values / Format | Description |
+|------------|----------|-------------------|----------|---------------|------------------------|-------------|
+| site_id | varchar | 8 | No | S001 | Alphanumeric | Unique ID for the site |
+| site_name | varchar | 50 | No | Diani Beach | Text | Name of the site |
+| area_id | int | 10 | No | 1 | Integer (FK) | Reference to area (lookup table) |
+| foraging_ground_id | int | 10 | Yes | 5 | Integer (FK) | Reference to foraging_ground (lookup table)|
+| is_capture_site | bit | 1 | Yes | 1 | 0 / 1 | Flag if site is used for turtle capture |
+| is_landing_site | bit | 1 | Yes | 0 | 0 / 1 | Flag if site is used for turtle/fish landing |
+| is_nesting_site | bit | 1 | Yes | 1 | 0 / 1 | Flag if site is used for turtle nesting |
+| is_release_site | bit | 1 | Yes | 0 | 0 / 1 | Flag if site is used for turtle release |
+| is_plot | bit | 1 | Yes | 0 | 0 / 1 | Flag if site is a beach plot |
+| is_hotel | bit | 1 | Yes | 1 | 0 / 1 | Flag if site is part of a hotel property |
+| is_private | bit | 1 | Yes | 0 | 0 / 1 | Flag if site is privately owned |
 
+---
 
 #### area
+| Field Name | SQL Type | Length / Precision | Nullable | Example Value | Allowed Values / Format | Description |
+|------------|----------|-------------------|----------|---------------|------------------------|-------------|
+| area_id | int | 10 | No | 1 | Integer (Primary Key) | Unique ID for each area/region |
+| area_name | varchar | 20 | No | Lamu County | Text | Name of the area |
+| admin_2 | varchar | 20 | Yes | Malindi | Text | Lower administrative unit (sub-county) |
+| admin_1 | varchar | 20 | Yes | Kilifi | Text | Mid-level administrative unit (county) |
+| admin_0 | varchar | 20 | Yes | Kenya | Text | top-level administrative unit (Country)|
 
-
-
+---
 
 #### fish_catch_view
-
 | Field Name | SQL Type | Length | Nullable | Example Value | Allowed Values / Format | Description |
 |------------|----------|--------|----------|---------------|--------------------------|-------------|
 | f_stock_id | varchar | 8 | No | FS0001 | Alphanumeric, unique | Unique fisheries record ID |
