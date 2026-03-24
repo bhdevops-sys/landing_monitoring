@@ -7,23 +7,23 @@ This catalog describes the structure, meaning, and rules of data in a the BH lan
 | Field Name | SQL Type | Length | Nullable | Example Value | Allowed Values / Format | Description |
 |------------|----------|--------|----------|---------------|--------------------------|-------------|
 | f_stock_id | varchar | 8 | No | FS0001 | Alphanumeric, unique | Unique fisheries record ID |
-| submission_date | datetime | — | No | 2025-03-10 15:00:00 | YYYY-MM-DD HH:MM:SS | Date/time data was submitted |
-| cluster_id | varchar | 8 | Yes | CL001 | FK reference | Cluster/group identifier |
+| submission_date | datetime | — | No | 2025-03-10 15:00:00 | YYYY-MM-DD HH:MM:SS | Date/time the data was submitted |
+| cluster_id | varchar | 8 | Yes | CL001 | FK reference | Reference to f_group_member (f_group_member_id) |
 | vessel_id | varchar | 8 | Yes | V001 | FK reference | Vessel identifier |
-| capture_site | varchar | 8 | Yes | SITE01 | FK reference | Fishing/capture site |
-| landing_site | varchar | 8 | No | LS001 | FK reference | Landing site |
+| capture_site | varchar | 8 | Yes | SITE01 | FK reference | Reference to site |
+| landing_site | varchar | 8 | No | LS001 | FK reference | Reference to site |
 | location | nvarchar | 100 | No | -3.123,40.123 | "lat,lon" decimal format | Geographic coordinates |
-| wgt_kg | float | — | No | 25.5 | Numeric ≥ 0 | Total catch weight (kg) |
-| collector_id | varchar | 20 | Yes | COL001 | FK reference | Data collector ID |
+| wgt_kg | float | — | No | 25.5 | Numeric ≥ 0 | Weight of total catch (kg) |
+| collector_id | varchar | 20 | Yes | COL001 | FK reference | Reference to party (`party_id`) |
 | crew_size | int | — | Yes | 3 | Integer ≥ 0 | Number of crew members |
-| fishing_start_time | datetime | — | Yes | 2025-03-10 08:00:00 | YYYY-MM-DD HH:MM:SS | Start of fishing activity |
-| fishing_stop_time | datetime | — | Yes | 2025-03-10 14:00:00 | YYYY-MM-DD HH:MM:SS | End of fishing activity |
-| recorded_share_id | varchar | 8 | Yes | RS01 | FK reference | Share category ID |
+| fishing_start_time | datetime | — | Yes | 2025-03-10 08:00:00 | YYYY-MM-DD HH:MM:SS | date & time of start of fishing activity |
+| fishing_stop_time | datetime | — | Yes | 2025-03-10 14:00:00 | YYYY-MM-DD HH:MM:SS | date & time end of fishing activity |
+| recorded_share_id | varchar | 8 | Yes | rcsd01 | FK reference | Reference to recorded_share |
 | sold_catch_cost | decimal | — | Yes | 5000 | Numeric ≥ 0 | Sale value of catch |
-| reason_catch_unsold_id | varchar | 8 | Yes | RC01 | FK reference | Reason catch was unsold |
-| BMU_id | varchar | 8 | Yes | BMU01 | FK reference | Beach Management Unit ID |
-| gear_id | int | — | Yes | 2 | FK reference | Fishing gear type |
-| fisher_id | varchar | 8 | Yes | F001 | FK reference | Fisher identifier |
+| reason_catch_unsold_id | varchar | 8 | Yes | rcu01 | FK reference | Reference to reason_catch_unsold |
+| BMU_id | varchar | 8 | Yes | BMU01 | FK reference | Beach Management Unit ID. Reference to party |
+| gear_id | int | — | Yes | 2 | FK reference | Fishing gear type. Reference to fishing_gear |
+| fisher_id | varchar | 8 | Yes | F001 | FK reference | Reference to party (`party_id`) |
 | gear_size | decimal | — | Yes | 50 | Numeric ≥ 0 | Size of fishing gear |
 
 ---
@@ -32,8 +32,8 @@ This catalog describes the structure, meaning, and rules of data in a the BH lan
 | Field Name | SQL Type | Length | Nullable | Example Value | Allowed Values / Format | Description |
 |------------|----------|--------|----------|---------------|--------------------------|-------------|
 | fishin_gear_id | varchar | 8 | No | FG001 | Alphanumeric, unique | Unique fishing gear record ID |
-| f_stock | varchar | 8 | No | FS0001 | FK reference | Fisheries stock reference |
-| gear_id | varchar | 8 | No | G001 | FK reference | Gear type identifier |
+| f_stock | varchar | 8 | No | FS0001 | FK reference | Reference to f_stock |
+| gear_id | varchar | 8 | No | G001 | FK reference | Gear type identifier. Reference to capture_method |
 | size | varchar | 8 | Yes | Medium | Free text / categorical | Gear size |
 
 ---
@@ -51,9 +51,9 @@ This catalog describes the structure, meaning, and rules of data in a the BH lan
 | Field Name | SQL Type | Length | Nullable | Example Value | Allowed Values / Format | Description |
 |------------|----------|--------|----------|---------------|--------------------------|-------------|
 | f_catch_stock_id | varchar | 8 | No | FCS001 | Alphanumeric, unique | Unique fisheries catch-stock ID |
-| f_stock_id | varchar | 8 | No | FS0001 | FK reference | Fisheries stock ID |
-| catch_id | varchar | 8 | No | C001 | FK reference | Catch species ID |
-| num_species | int | — | Yes | 10 | Integer ≥ 0 | Number of individuals |
+| f_stock_id | varchar | 8 | No | FS0001 | FK reference | Reference to f_stock  |
+| catch_id | varchar | 8 | No | C001 | FK reference | Catch species ID. Reference to catch  |
+| num_species | int | — | Yes | 10 | Integer ≥ 0 | Number of individuals species caught |
 | wgt | float | — | Yes | 25.5 | Numeric ≥ 0 | Weight of catch (kg) |
 | photo_if_new | varchar | 250 | Yes | fish.jpg | File path / URL | Photo if species is new |
 
@@ -76,8 +76,8 @@ This catalog describes the structure, meaning, and rules of data in a the BH lan
 |------------|----------|--------|----------|---------------|--------------------------|-------------|
 | gear_exchange_id | varchar | 8 | No | GE001 | Alphanumeric, unique | Unique gear exchange ID |
 | date_time | datetime | — | Yes | 2025-03-01 09:00:00 | YYYY-MM-DD HH:MM:SS | Date and time of exchange |
-| fisher_group_id | varchar | 20 | No | FGROUP01 | FK reference | Fisher group ID |
-| bmu_id | varchar | 8 | No | BMU01 | FK reference | Beach Management Unit ID |
+| fisher_group_id | varchar | 20 | No | fgroup01 | FK reference | Fisher group ID |
+| bmu_id | varchar | 8 | No | BMU01 | FK reference | Beach Management Unit ID. Reference to party |
 
 ---
 
@@ -85,7 +85,7 @@ This catalog describes the structure, meaning, and rules of data in a the BH lan
 | Field Name | SQL Type | Length | Nullable | Example Value | Allowed Values / Format | Description |
 |------------|----------|--------|----------|---------------|--------------------------|-------------|
 | f_group_member_id | varchar | 8 | No | MEM001 | Alphanumeric, unique | Group member ID |
-| gear_exchange_id | varchar | 8 | No | GE001 | FK reference | Gear exchange ID |
+| gear_exchange_id | varchar | 8 | No | GE001 | FK reference | Gear exchange ID. Reference to gear_exchange (historical records) |
 | party_id | varchar | 8 | No | P001 | FK reference | Participant/party ID |
 
 ---
@@ -181,10 +181,10 @@ This catalog describes the structure, meaning, and rules of data in a the BH lan
 | Field Name | SQL Type | Length | Nullable | Example Value | Allowed Values / Format | Description |
 |------------|----------|--------|----------|---------------|--------------------------|-------------|
 | f_stock_id | varchar | 8 | No | FS0001 | Alphanumeric, unique | Unique fisheries record ID |
-| date_time_landed | datetime | — | No | 2025-03-10 14:30:00 | YYYY-MM-DD HH:MM:SS | Date and time of landing |
+| date_time_landed | datetime | — | No | 2025-03-10 14:30:00 | YYYY-MM-DD HH:MM:SS | Date and time of catch landing |
 | Data Collector Name | varchar | 200 | Yes | Jane Doe | Free text | Name of data collector |
-| organization | varchar | 23 | No | KMFRI | Predefined org names | Organization collecting data |
-| admin3 | varchar | 200 | Yes | Watamu | Free text | Sub-county / locality |
+| organization | varchar | 23 | No | Bahari Hai | Predefined org names | Organization collecting data |
+| admin3 | varchar | 200 | Yes | Uyombo BMU | Free text | BMU location |
 | admin_2 | varchar | 20 | Yes | Kilifi North | Free text | County subdivision |
 | admin_1 | varchar | 20 | Yes | Kilifi | Free text | County |
 | Country | varchar | 20 | Yes | Kenya | Country names | Country |
@@ -198,7 +198,7 @@ This catalog describes the structure, meaning, and rules of data in a the BH lan
 | landing_site | varchar | 50 | Yes | Watamu Beach | Free text | Landing site |
 | fishing_hours | int | — | Yes | 6 | Integer ≥ 0 | Duration of fishing trip (hours) |
 | local_name | ntext | — | Yes | Changu | Free text | Local fish species name |
-| label_name | ntext | — | Yes | Snapper | Free text | Market/common name |
+| label_name | ntext | — | Yes | Snapper | Free text | common name |
 | scientific_species | ntext | — | Yes | Lutjanus spp. | Scientific naming format | Scientific species name |
 | individual_wght(kg) | ntext | — | Yes | 2.5 | Numeric (kg) | Weight per individual |
 | count_of_individuals_per_species | ntext | — | Yes | 10 | Integer ≥ 0 | Count per species |
